@@ -1,0 +1,17 @@
+# @package wrappers
+
+# limits the maximum number of time steps of an episode
+maze.core.wrappers.time_limit_wrapper.TimeLimitWrapper:
+  max_episode_steps: 200
+
+maze.core.wrappers.observation_normalization.observation_normalization_wrapper.ObservationNormalizationWrapper:
+  default_strategy: maze.normalization_strategies.MeanZeroStdOneObservationNormalizationStrategy
+  default_strategy_config:
+    clip_range: [~, ~]
+    axis: [0]
+  default_statistics: ~
+  statistics_dump: statistics.pkl
+  sampling_policy:
+    _target_: maze.core.agent.random_policy.RandomPolicy
+  exclude: ~
+  manual_config: ~

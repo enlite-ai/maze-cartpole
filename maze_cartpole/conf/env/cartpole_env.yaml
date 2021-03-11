@@ -1,0 +1,28 @@
+# @package _global_
+
+env:
+  _target_: maze_cartpole.env.maze_env.CartPoleEnvironment
+
+  # General parameters of the environment
+  # (reused across different components using Hydra interpolation)
+  _:
+    theta_threshold_radians: 0.20943951  # Angle at which to fail an episode (12 * 2 * pi / 360).
+    x_threshold: 2.4  # Position at which to fail an episode
+
+  # Core environment configuration
+  core_env:
+    _target_: maze_cartpole.env.core_env.CartPoleCoreEnvironment
+    theta_threshold_radians: ${env._.theta_threshold_radians}
+    x_threshold: ${env._.x_threshold}
+
+    # Specify reward computation
+    reward_aggregator:
+      _target_: maze_cartpole.reward.default_reward.CartPoleRewardAggregator
+
+  # Action and observation conversion interfaces
+  action_conversion:
+    - _target_: maze_cartpole.space_interfaces.dict_action_conversion.DictActionConversion
+  observation_conversion:
+    - _target_: maze_cartpole.space_interfaces.dict_observation_conversion.DictObservationConversion
+      x_threshold: ${env._.x_threshold}
+      theta_threshold_radians: ${env._.theta_threshold_radians}

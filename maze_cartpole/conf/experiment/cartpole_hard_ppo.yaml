@@ -1,0 +1,17 @@
+# @package _global_
+
+# defaults to override
+defaults:
+  - override /env: cartpole_env
+  - override /algorithm: ppo
+
+# algorithm specific overrides
+algorithm:
+  batch_size: 50
+
+# env specific overrides
+env:
+
+  _:
+    theta_threshold_radians: 0.104666667  # Angle at which to fail an episode (6 * 2 * pi / 360).
+    x_threshold: 2.4  # Position at which to fail an episode

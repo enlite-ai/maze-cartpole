@@ -1,0 +1,6 @@
+# @package model
+critic:
+  _target_: maze.perception.models.critics.StepStateCriticComposer
+  networks:
+    - _target_: maze_cartpole.models.critic.CartPoleStateValueNet
+      non_lin: torch.nn.Tanh

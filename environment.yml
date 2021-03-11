@@ -1,0 +1,11 @@
+name: maze-cartpole
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.7
+  - pytorch
+  - pygraphviz
+  - pip:
+    - maze-rl
+    - ray[rllib] >= 1.2.0
