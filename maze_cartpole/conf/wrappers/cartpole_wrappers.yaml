@@ -4,6 +4,7 @@
 maze.core.wrappers.time_limit_wrapper.TimeLimitWrapper:
   max_episode_steps: 200
 
+# normalizes observations
 maze.core.wrappers.observation_normalization.observation_normalization_wrapper.ObservationNormalizationWrapper:
   default_strategy: maze.normalization_strategies.MeanZeroStdOneObservationNormalizationStrategy
   default_strategy_config:
@@ -15,3 +16,8 @@ maze.core.wrappers.observation_normalization.observation_normalization_wrapper.O
     _target_: maze.core.agent.random_policy.RandomPolicy
   exclude: ~
   manual_config: ~
+
+maze.core.wrappers.monitoring_wrapper.MazeEnvMonitoringWrapper:
+  observation_logging: false
+  action_logging: true
+  reward_logging: true
