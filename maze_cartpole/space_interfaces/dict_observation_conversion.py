@@ -26,10 +26,10 @@ class DictObservationConversion(ObservationConversionInterface):
         """Converts core environment MazeState to a machine readable agent observation."""
 
         # Compile dict space observation
-        return {'cart_position': np.asarray(maze_state.cart_position, dtype=np.float32),
-                'cart_velocity': np.asarray(maze_state.cart_velocity, dtype=np.float32),
-                'pole_angle': np.asarray(maze_state.pole_angle, dtype=np.float32),
-                'pole_angular_velocity': np.asarray(maze_state.pole_angular_velocity, dtype=np.float32)}
+        return {'cart_position': np.asarray([maze_state.cart_position], dtype=np.float32),
+                'cart_velocity': np.asarray([maze_state.cart_velocity], dtype=np.float32),
+                'pole_angle': np.asarray([maze_state.pole_angle], dtype=np.float32),
+                'pole_angular_velocity': np.asarray([maze_state.pole_angular_velocity], dtype=np.float32)}
 
     @override(ObservationConversionInterface)
     def space_to_maze(self, observation: Dict[str, np.ndarray]) -> CartPoleMazeState:
