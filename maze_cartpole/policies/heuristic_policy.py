@@ -25,7 +25,7 @@ class CartPoleDummyHeuristic(Policy):
 
     @override(Policy)
     def compute_action(self, observation: ObservationType, maze_state: Optional[MazeStateType] = None,
-                       policy_id: Union[str, int] = None, deterministic: bool = False) -> ActionType:
+                       actor_id: Union[str, int] = None, deterministic: bool = False) -> ActionType:
         """implementation of :class:`~maze.core.agent.policy.Policy` interface
         """
         action = 1 if observation["pole_angle"] > 0 else 0
@@ -34,7 +34,7 @@ class CartPoleDummyHeuristic(Policy):
     @override(Policy)
     def compute_top_action_candidates(self, observation: ObservationType,
                                       num_candidates: int, maze_state: Optional[MazeStateType] = None,
-                                      policy_id: Union[str, int] = None, deterministic: bool = False) \
+                                      actor_id: Union[str, int] = None, deterministic: bool = False) \
             -> Tuple[Sequence[ActionType], Sequence[float]]:
         """implementation of :class:`~maze.core.agent.policy.Policy` interface
         """
