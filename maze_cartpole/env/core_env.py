@@ -7,6 +7,7 @@ from gym.utils import seeding
 
 from maze.core.annotations import override
 from maze.core.env.core_env import CoreEnv
+from maze.core.env.structured_env import StepKeyType
 from maze.core.events.pubsub import Pubsub
 from maze.core.utils.factory import Factory
 from maze.core.utils.seeding import set_random_states
@@ -170,7 +171,7 @@ class CartPoleCoreEnvironment(CoreEnv):
         return False
 
     @override(CoreEnv)
-    def actor_id(self) -> Tuple[Union[str, int], int]:
+    def actor_id(self) -> Tuple[StepKeyType, int]:
         """Returns the currently executed actor along with the policy id. The id is unique only with
         respect to the policies (every policy has its own actor 0).
         Note that identities of done actors can not be reused in the same rollout.
@@ -178,6 +179,16 @@ class CartPoleCoreEnvironment(CoreEnv):
         :return: The current actor, as tuple (policy id, actor number).
         """
         return 0, 0
+
+    @property
+    @override(CoreEnv)
+    def agent_counts_dict(self) -> Dict[Union[str, int], int]:
+        """Returns the count of agents for individual sub-steps (or -1 for dynamic agent count).
+
+        As this is a single-step single-agent environment, in which 1 agent gets to act during sub-step 0,
+        we return {0: 1}.
+        """
+        return {0: 1}
 
     @override(CoreEnv)
     def get_kpi_calculator(self) -> CartPoleKpiCalculator:
