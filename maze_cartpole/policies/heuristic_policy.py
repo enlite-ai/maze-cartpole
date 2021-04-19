@@ -26,6 +26,11 @@ class CartPoleDummyHeuristic(Policy):
         return False
 
     @override(Policy)
+    def seed(self, seed: int) -> None:
+        """Not applicable since heuristic is deterministic"""
+        pass
+
+    @override(Policy)
     def compute_action(self, observation: ObservationType, maze_state: Optional[MazeStateType] = None,
                        env: Optional[BaseEnv] = None, actor_id: ActorIDType = None, deterministic: bool = False
                        ) -> ActionType:

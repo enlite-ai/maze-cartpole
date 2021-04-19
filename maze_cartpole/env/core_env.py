@@ -1,16 +1,14 @@
 """Contains the core env implementation. """
 import math
-from typing import Union, Tuple, Dict, Any
+from typing import Union, Tuple, Dict, Any, Optional
 
 import numpy as np
-from gym.utils import seeding
 
 from maze.core.annotations import override
 from maze.core.env.core_env import CoreEnv
 from maze.core.env.structured_env import StepKeyType
 from maze.core.events.pubsub import Pubsub
 from maze.core.utils.factory import Factory
-from maze.core.utils.seeding import set_random_states
 from maze_cartpole.env.events import CartPoleEvents
 from maze_cartpole.env.kpi_calculator import CartPoleKpiCalculator
 from maze_cartpole.env.maze_action import CartPoleMazeAction
@@ -48,12 +46,13 @@ class CartPoleCoreEnvironment(CoreEnv):
         self.pubsub.register_subscriber(self.reward_aggregator)
 
         # setup environment
-        self.np_random, seed = seeding.np_random()
-        self.cart_position = self.np_random.uniform(low=-0.05, high=0.05, size=(1,))[0]
-        self.cart_velocity = self.np_random.uniform(low=-0.05, high=0.05, size=(1,))[0]
-        self.pole_angle = self.np_random.uniform(low=-0.05, high=0.05, size=(1,))[0]
-        self.pole_velocity = self.np_random.uniform(low=-0.05, high=0.05, size=(1,))[0]
+        self.cart_position = None
+        self.cart_velocity = None
+        self.pole_angle = None
+        self.pole_velocity = None
 
+        self.env_rng: Optional[np.random.RandomState] = None
+        self.seed(None)
         self._setup_env()
 
         # initialize rendering
@@ -63,10 +62,10 @@ class CartPoleCoreEnvironment(CoreEnv):
         """Setup environment."""
 
         # Setup env here
-        self.cart_position = self.np_random.uniform(low=-0.05, high=0.05, size=(1,))[0]
-        self.cart_velocity = self.np_random.uniform(low=-0.05, high=0.05, size=(1,))[0]
-        self.pole_angle = self.np_random.uniform(low=-0.05, high=0.05, size=(1,))[0]
-        self.pole_velocity = self.np_random.uniform(low=-0.05, high=0.05, size=(1,))[0]
+        self.cart_position = self.env_rng.uniform(low=-0.05, high=0.05, size=(1,))[0]
+        self.cart_velocity = self.env_rng.uniform(low=-0.05, high=0.05, size=(1,))[0]
+        self.pole_angle = self.env_rng.uniform(low=-0.05, high=0.05, size=(1,))[0]
+        self.pole_velocity = self.env_rng.uniform(low=-0.05, high=0.05, size=(1,))[0]
 
         self.gravity = 9.8
         self.masscart = 1.0
@@ -156,9 +155,11 @@ class CartPoleCoreEnvironment(CoreEnv):
         pass
 
     @override(CoreEnv)
-    def seed(self, seed: int) -> None:
+    def seed(self, seed: Optional[int]) -> None:
         """Seed random state of environment."""
-        set_random_states(seed)
+        self.env_rng = np.random.RandomState(seed)
+        if seed is not None:
+            self._setup_env()
 
     @override(CoreEnv)
     def get_renderer(self) -> CartPoleRenderer:
