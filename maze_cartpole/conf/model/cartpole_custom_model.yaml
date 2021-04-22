@@ -8,7 +8,7 @@ policy:
   networks:
   - _target_: maze_cartpole.models.actor.CartPolePolicyNet
     non_lin: torch.nn.Tanh
-  separated_agent_networks: False
+  substeps_with_separate_agent_nets: []
 
 # No critic by default
 critic: ~
