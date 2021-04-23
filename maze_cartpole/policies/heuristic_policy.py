@@ -1,6 +1,6 @@
 """Dummy structured policy for the MazeProjectTemplate."""
 
-from typing import Union, Sequence, Tuple, Optional
+from typing import Sequence, Tuple, Optional
 
 from maze.core.agent.policy import Policy
 from maze.core.annotations import override
@@ -8,6 +8,7 @@ from maze.core.env.action_conversion import ActionType
 from maze.core.env.base_env import BaseEnv
 from maze.core.env.maze_state import MazeStateType
 from maze.core.env.observation_conversion import ObservationType
+from maze.core.env.structured_env import ActorIDType
 
 
 class CartPoleDummyHeuristic(Policy):
