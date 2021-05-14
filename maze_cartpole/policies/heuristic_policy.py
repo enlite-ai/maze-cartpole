@@ -41,7 +41,7 @@ class CartPoleDummyHeuristic(Policy):
 
     @override(Policy)
     def compute_top_action_candidates(self, observation: ObservationType,
-                                      num_candidates: int, maze_state: Optional[MazeStateType] = None,
+                                      num_candidates: Optional[int], maze_state: Optional[MazeStateType] = None,
                                       env: Optional[BaseEnv] = None, actor_id: ActorIDType = None,
                                       deterministic: bool = False) \
             -> Tuple[Sequence[ActionType], Sequence[float]]:
