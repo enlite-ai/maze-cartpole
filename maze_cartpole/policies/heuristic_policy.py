@@ -8,7 +8,7 @@ from maze.core.env.action_conversion import ActionType
 from maze.core.env.base_env import BaseEnv
 from maze.core.env.maze_state import MazeStateType
 from maze.core.env.observation_conversion import ObservationType
-from maze.core.env.structured_env import ActorIDType
+from maze.core.env.structured_env import ActorID
 
 
 class CartPoleDummyHeuristic(Policy):
@@ -32,7 +32,7 @@ class CartPoleDummyHeuristic(Policy):
 
     @override(Policy)
     def compute_action(self, observation: ObservationType, maze_state: Optional[MazeStateType] = None,
-                       env: Optional[BaseEnv] = None, actor_id: ActorIDType = None, deterministic: bool = False
+                       env: Optional[BaseEnv] = None, actor_id: ActorID = None, deterministic: bool = False
                        ) -> ActionType:
         """implementation of :class:`~maze.core.agent.policy.Policy` interface
         """
@@ -42,7 +42,7 @@ class CartPoleDummyHeuristic(Policy):
     @override(Policy)
     def compute_top_action_candidates(self, observation: ObservationType,
                                       num_candidates: Optional[int], maze_state: Optional[MazeStateType] = None,
-                                      env: Optional[BaseEnv] = None, actor_id: ActorIDType = None,
+                                      env: Optional[BaseEnv] = None, actor_id: ActorID = None,
                                       deterministic: bool = False) \
             -> Tuple[Sequence[ActionType], Sequence[float]]:
         """implementation of :class:`~maze.core.agent.policy.Policy` interface
