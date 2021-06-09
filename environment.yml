@@ -8,4 +8,4 @@ dependencies:
   - pygraphviz
   - pip:
     - maze-rl
-    - ray[rllib] >= 1.2.0
+    - ray[rllib]>=1.4.0
