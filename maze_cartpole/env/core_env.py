@@ -6,7 +6,8 @@ import numpy as np
 
 from maze.core.annotations import override
 from maze.core.env.core_env import CoreEnv
-from maze.core.env.structured_env import StepKeyType, ActorID
+from maze.core.env.reward import RewardAggregatorInterface
+from maze.core.env.structured_env import ActorID
 from maze.core.events.pubsub import Pubsub
 from maze.core.utils.factory import Factory
 from maze_cartpole.env.events import CartPoleEvents
@@ -14,8 +15,6 @@ from maze_cartpole.env.kpi_calculator import CartPoleKpiCalculator
 from maze_cartpole.env.maze_action import CartPoleMazeAction
 from maze_cartpole.env.maze_state import CartPoleMazeState
 from maze_cartpole.env.renderer import CartPoleRenderer
-from maze_cartpole.reward.base_reward import BaseRewardAggregator
-from maze_cartpole.reward.default_reward import CartPoleRewardAggregator
 
 
 class CartPoleCoreEnvironment(CoreEnv):
@@ -29,7 +28,7 @@ class CartPoleCoreEnvironment(CoreEnv):
     """
 
     def __init__(self, theta_threshold_radians: float, x_threshold: float,
-                 reward_aggregator: CartPoleRewardAggregator):
+                 reward_aggregator: RewardAggregatorInterface):
         super().__init__()
 
         self.theta_threshold_radians = theta_threshold_radians
@@ -42,7 +41,7 @@ class CartPoleCoreEnvironment(CoreEnv):
         self.kpi_calculator = CartPoleKpiCalculator()
 
         # init reward and register it with pubsub
-        self.reward_aggregator = Factory(base_type=BaseRewardAggregator).instantiate(reward_aggregator)
+        self.reward_aggregator = Factory(RewardAggregatorInterface).instantiate(reward_aggregator)
         self.pubsub.register_subscriber(self.reward_aggregator)
 
         # setup environment
@@ -130,12 +129,12 @@ class CartPoleCoreEnvironment(CoreEnv):
         self.events.cart_velocity(velocity=self.cart_velocity)
 
         # aggregate reward from events
-        reward = self.reward_aggregator.summarize_reward()
+        rewards = self.reward_aggregator.summarize_reward()
 
         # compile env state
         maze_state = self.get_maze_state()
 
-        return maze_state, reward, done, info
+        return maze_state, sum(rewards), done, info
 
     @override(CoreEnv)
     def get_maze_state(self) -> CartPoleMazeState:

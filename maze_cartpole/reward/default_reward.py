@@ -1,13 +1,13 @@
 """Contains the reward aggregator for the environment."""
-from typing import List
+from typing import List, Any
 
 from maze.core.annotations import override
+from maze.core.env.reward import RewardAggregatorInterface
 from maze.utils.bcolors import BColors
 from maze_cartpole.env.events import CartPoleEvents
-from maze_cartpole.reward.base_reward import BaseRewardAggregator
 
 
-class CartPoleRewardAggregator(BaseRewardAggregator):
+class CartPoleRewardAggregator(RewardAggregatorInterface):
     """Default reward scheme for the environment.
     """
 
@@ -15,7 +15,14 @@ class CartPoleRewardAggregator(BaseRewardAggregator):
         super().__init__()
         self.steps_beyond_done = None
 
-    @override(BaseRewardAggregator)
+    @override(RewardAggregatorInterface)
+    def get_interfaces(self) -> List[Any]:
+        """Specification of the event interfaces this subscriber wants to receive events from.
+        Every subscriber must implement this configuration method.
+        :return: A list of interface classes"""
+        return [CartPoleEvents]
+
+    @override(RewardAggregatorInterface)
     def summarize_reward(self) -> List[float]:
         """implementation of :class:`~maze.core.env.reward.RewardAggregatorInterface` interface
         """
