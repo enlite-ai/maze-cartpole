@@ -1,7 +1,8 @@
 """Contains the reward aggregator for the environment."""
-from typing import List, Any
+from typing import List, Any, Optional
 
 from maze.core.annotations import override
+from maze.core.env.maze_state import MazeStateType
 from maze.core.env.reward import RewardAggregatorInterface
 from maze.utils.bcolors import BColors
 from maze_cartpole.env.events import CartPoleEvents
@@ -23,7 +24,7 @@ class CartPoleRewardAggregator(RewardAggregatorInterface):
         return [CartPoleEvents]
 
     @override(RewardAggregatorInterface)
-    def summarize_reward(self) -> List[float]:
+    def summarize_reward(self, maze_state: Optional[MazeStateType] = None) -> List[float]:
         """implementation of :class:`~maze.core.env.reward.RewardAggregatorInterface` interface
         """
 

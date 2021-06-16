@@ -128,11 +128,11 @@ class CartPoleCoreEnvironment(CoreEnv):
 
         self.events.cart_velocity(velocity=self.cart_velocity)
 
-        # aggregate reward from events
-        rewards = self.reward_aggregator.summarize_reward()
-
         # compile env state
         maze_state = self.get_maze_state()
+
+        # aggregate reward from events
+        rewards = self.reward_aggregator.summarize_reward(maze_state)
 
         return maze_state, sum(rewards), done, info
 
