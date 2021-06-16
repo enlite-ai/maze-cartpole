@@ -1,7 +1,7 @@
 # @package model
 _target_: maze.perception.models.template_model_composer.TemplateModelComposer
 
-distribution_mapper_config: []
+distribution_mapper_config: [ ]
 
 shared_embedding_keys: ~
 
@@ -19,14 +19,14 @@ model_builder:
     feature:
       block_type: maze.perception.blocks.DenseBlock
       block_params:
-        hidden_units: [4]
+        hidden_units: [ 4 ]
         non_lin: torch.nn.Tanh
     hidden:
       block_type: maze.perception.blocks.DenseBlock
       block_params:
-        hidden_units: [128, 128]
+        hidden_units: [ 128, 128 ]
         non_lin: torch.nn.Tanh
-    recurrence: {}
+    recurrence: { }
 
 policy:
   _target_: maze.perception.models.policies.ProbabilisticPolicyComposer
