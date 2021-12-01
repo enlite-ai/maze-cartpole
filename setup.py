@@ -12,7 +12,7 @@ setup(
     version="0.0.2.dev1",
     packages=find_packages(include=['maze_cartpole']),
     include_package_data=True,
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     url='https://github.com/enlite-ai/maze-cartpole',
     install_requires=["maze-rl"],
 )
