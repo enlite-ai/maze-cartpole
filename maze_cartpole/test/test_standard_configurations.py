@@ -21,7 +21,7 @@ configurations = [
     ["conf_rollout", {"env": "cartpole_env"}],
     ["conf_rollout", {"policy": "cartpole_heuristic_policy", "env": "cartpole_env"}],
     ["conf_rollout", {"policy": "cartpole_heuristic_policy", "runner": "sequential",
-                      "runner.render": True, "runner.n_episodes": 1, "env": "cartpole_env"}],
+                      "runner.record_trajectory": True, "runner.render": True, "runner.n_episodes": 1, "env": "cartpole_env"}],
 
     ["conf_train", {"+experiment": "cartpole_hard_ppo"}],
 ]
