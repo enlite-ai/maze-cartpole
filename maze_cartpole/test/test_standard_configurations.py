@@ -41,7 +41,7 @@ configurations = [
 def test_standard_configurations(config_name: str, hydra_overrides: Dict[str, str], tmpdir):
     # run training
     try:
-        with Timeout(seconds=15):
+        with Timeout(seconds=30):
             if config_name == 'conf_train':
                 hydra_overrides['log_base_dir'] = tmpdir
             run_maze_job(hydra_overrides, config_module="maze.conf", config_name=config_name)
