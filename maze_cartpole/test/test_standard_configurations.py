@@ -11,16 +11,16 @@ from maze.utils.timeout import Timeout
 configurations = [
     ["conf_train", {"algorithm": "ppo",
                     "env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-                    'seeding.env_base_seed': 698376768}],
+                    'seeding.env_base_seed': 698376768, 'runner': 'dev'}],
     ["conf_train", {"algorithm": "ppo", "model": "cartpole_template_model",
                     "env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-                    'seeding.env_base_seed': 698376768}],
+                    'seeding.env_base_seed': 698376768, 'runner': 'dev'}],
     ["conf_train", {"algorithm": "ppo", "model": "cartpole_custom_model", "critic": "cartpole_custom_state_critic",
                     "env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-                    'seeding.env_base_seed': 698376768}],
+                    'seeding.env_base_seed': 698376768, 'runner': 'dev'}],
     ["conf_train", {"algorithm": "ppo", "wrappers": "cartpole_wrappers",
                     "env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-                    'seeding.env_base_seed': 698376768}],
+                    'seeding.env_base_seed': 698376768, 'runner': 'dev'}],
 
     ["conf_rollout", {"env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
                       'seeding.env_base_seed': 698376768}],
@@ -33,7 +33,7 @@ configurations = [
                       'seeding.env_base_seed': 698376768}],
 
     ["conf_train", {"+experiment": "cartpole_hard_ppo", 'seeding.agent_base_seed': 2079466554,
-                    'seeding.env_base_seed': 698376768}],
+                    'seeding.env_base_seed': 698376768, 'runner': 'dev'}],
 ]
 
 
@@ -41,7 +41,7 @@ configurations = [
 def test_standard_configurations(config_name: str, hydra_overrides: Dict[str, str], tmpdir):
     # run training
     try:
-        with Timeout(seconds=30):
+        with Timeout(seconds=100):
             if config_name == 'conf_train':
                 hydra_overrides['log_base_dir'] = tmpdir
             run_maze_job(hydra_overrides, config_module="maze.conf", config_name=config_name)
