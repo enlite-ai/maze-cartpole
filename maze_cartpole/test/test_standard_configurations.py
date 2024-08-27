@@ -11,29 +11,29 @@ from maze.utils.timeout import Timeout
 configurations = [
     ["conf_train", {"algorithm": "ppo",
                     "env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-                    'seeding.env_base_seed': 698376768, 'runner': 'dev'}],
+                    'seeding.env_base_seed': 698376768, 'runner': 'dev', 'configuration': 'test'}],
     ["conf_train", {"algorithm": "ppo", "model": "cartpole_template_model",
                     "env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-                    'seeding.env_base_seed': 698376768, 'runner': 'dev'}],
+                    'seeding.env_base_seed': 698376768, 'runner': 'dev', 'configuration': 'test'}],
     ["conf_train", {"algorithm": "ppo", "model": "cartpole_custom_model", "critic": "cartpole_custom_state_critic",
                     "env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-                    'seeding.env_base_seed': 698376768, 'runner': 'dev'}],
+                    'seeding.env_base_seed': 698376768, 'runner': 'dev', 'configuration': 'test'}],
     ["conf_train", {"algorithm": "ppo", "wrappers": "cartpole_wrappers",
                     "env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-                    'seeding.env_base_seed': 698376768, 'runner': 'dev'}],
+                    'seeding.env_base_seed': 698376768, 'runner': 'dev', 'configuration': 'test'}],
 
     ["conf_rollout", {"env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-                      'seeding.env_base_seed': 698376768}],
+                      'seeding.env_base_seed': 698376768, 'configuration': 'test'}],
     ["conf_rollout",
      {"policy": "cartpole_heuristic_policy", "env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-      'seeding.env_base_seed': 698376768}],
+      'seeding.env_base_seed': 698376768, 'configuration': 'test'}],
     ["conf_rollout", {"policy": "cartpole_heuristic_policy", "runner": "sequential",
                       "runner.record_trajectory": True, "runner.render": True, "runner.n_episodes": 1,
                       "env": "cartpole_env", 'seeding.agent_base_seed': 2079466554,
-                      'seeding.env_base_seed': 698376768}],
+                      'seeding.env_base_seed': 698376768, 'configuration': 'test'}],
 
     ["conf_train", {"+experiment": "cartpole_hard_ppo", 'seeding.agent_base_seed': 2079466554,
-                    'seeding.env_base_seed': 698376768, 'runner': 'dev'}],
+                    'seeding.env_base_seed': 698376768, 'runner': 'dev', 'configuration': 'test'}],
 ]
 
 
