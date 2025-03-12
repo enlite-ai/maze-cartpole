@@ -2,7 +2,7 @@
 
 from typing import Dict
 
-from gym import spaces
+from gymnasium import spaces
 
 from maze.core.annotations import override
 from maze.core.env.action_conversion import ActionConversionInterface
@@ -27,7 +27,7 @@ class DictActionConversion(ActionConversionInterface):
 
     @override(ActionConversionInterface)
     def space(self) -> spaces.Dict:
-        """Returns Gym dict action space."""
+        """Returns Gymnasium dict action space."""
         return spaces.Dict({
             "action": spaces.Discrete(2),  # Move the cart right (1) or move it left (0)
         })

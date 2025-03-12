@@ -10,7 +10,7 @@ from maze_cartpole.env.core_env import CartPoleCoreEnvironment
 
 
 class CartPoleEnvironment(MazeEnv[CartPoleCoreEnvironment]):
-    """Maze environment transforming the CoreEnv into a trainable, Gym-style environment.
+    """Maze environment transforming the CoreEnv into a trainable, Gymnasium-style environment.
 
     :param core_env: The underlying core environment.
     :param action_conversion: An action conversion interface.

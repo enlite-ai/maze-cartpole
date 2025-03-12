@@ -3,7 +3,7 @@
 from typing import Dict
 
 import numpy as np
-from gym import spaces
+from gymnasium import spaces
 
 from maze.core.annotations import override
 from maze.core.env.observation_conversion import ObservationConversionInterface
@@ -38,9 +38,9 @@ class DictObservationConversion(ObservationConversionInterface):
 
     @override(ObservationConversionInterface)
     def space(self) -> spaces.Dict:
-        """Return the Gym dict observation space based on the given params.
+        """Return the Gymnasium dict observation space based on the given params.
 
-        :return: Gym space object
+        :return: Gymnasium space object
             - cart_position: The cart position on the x axis
             - cart_velocity: The cart's movement velocity
             - pole_angle: The angle of the pole on the cart

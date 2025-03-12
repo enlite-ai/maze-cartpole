@@ -5,7 +5,7 @@
 This repository serves as a template for starting your own projects with Maze.
 
 As such it implements a simple, yet fully functional environment as a placeholder
-(a re-implementation of the [Gym CartPole environment](https://gym.openai.com/envs/CartPole-v1/))
+(a re-implementation of the [Gymnasium CartPole environment](https://gymnasium.farama.org/environments/classic_control/cart_pole/))
 for a new Maze project and already contains a hydra config system to train and rollout your agents.
 
 For building your own project we recommend to start with:
