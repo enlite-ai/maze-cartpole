@@ -1,0 +1,27 @@
+# pyproject.toml for maze-cartpole
+[build-system]
+requires = ['setuptools>=61.0', 'wheel']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'maze-cartpole'
+version = '0.0.3.dev1'
+description = ''
+readme = { file = 'README.md', content-type = 'text/markdown' }
+authors = [{ name = 'enliteAI GmbH', email = 'office@enlite.ai' }]
+urls = { Homepage = 'https://enlite.ai', Repository = 'https://github.com/enlite-ai/maze-cartpole' }
+requires-python = '>=3.9'
+dependencies = [
+    'maze-rl',
+]
+
+[tool.setuptools.packages.find]
+# Start package search from the current directory
+where = ['.']
+# Use patterns
+include = ['maze_cartpole', 'maze_cartpole.*', 'hydra_plugins']
+# Enable namespace discovery (similar to find_namespace_packages)
+namespaces = true
+
+[tool.setuptools]
+include-package-data = true
