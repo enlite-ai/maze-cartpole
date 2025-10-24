@@ -89,10 +89,13 @@ class CartPoleCoreEnvironment(CoreEnv):
         * Update events
         * Calculate reward
 
+        Note: Within the core_env the done condition can only be 'terminated'.
+              The 'truncated' condition is set to false as this is handled by the
+              maze.core.wrappers.time_limit_wrapper.TimeLimitWrapper.
+
         :param maze_action: MazeAction to take.
         :return: state, reward, done, info
         """
-
         info = {}
         # Implement you step function here and record events
 
@@ -118,12 +121,13 @@ class CartPoleCoreEnvironment(CoreEnv):
             self.pole_velocity = self.pole_velocity + self.tau * thetaacc
             self.pole_angle = self.pole_angle + self.tau * self.pole_velocity
 
-        done = False
+        done_terminated = False
+        done_truncated = False
         if self.cart_position < -self.x_threshold or self.cart_position > self.x_threshold:
-            done = True
+            done_terminated = True
             self.events.cart_moved_away()
         if self.pole_angle < -self.theta_threshold_radians or self.pole_angle > self.theta_threshold_radians:
-            done = True
+            done_terminated = True
             self.events.pole_fell_over()
 
         self.events.cart_velocity(velocity=self.cart_velocity)
@@ -134,6 +138,9 @@ class CartPoleCoreEnvironment(CoreEnv):
         # aggregate reward from events
         rewards = self.reward_aggregator.summarize_reward(maze_state)
 
+        done = done_terminated or done_truncated
+        if done:
+            info['done_solved'] = done_terminated
         return maze_state, sum(rewards), done, info
 
     @override(CoreEnv)
@@ -144,7 +151,10 @@ class CartPoleCoreEnvironment(CoreEnv):
 
     @override(CoreEnv)
     def reset(self) -> CartPoleMazeState:
-        """Resets the environment to initial state."""
+        """Resets the environment to initial state.
+        
+        Note: Decoupled logic. Seeding functionality is supported through dedicated seed() method.
+        """
         self._setup_env()
         return self.get_maze_state()
 
