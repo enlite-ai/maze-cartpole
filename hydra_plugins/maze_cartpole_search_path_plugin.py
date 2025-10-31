@@ -14,4 +14,4 @@ class AddConfToSearchPathPlugin(SearchPathPlugin):
     def manipulate_search_path(self, search_path: ConfigSearchPath) -> None:
         """implement the SearchPathPlugin interface"""
         search_path.append("project", "pkg://maze.conf")
-        search_path.append("project", "pkg://maze_cartpole.conf")
+        search_path.append("project", "pkg://maze_frozenlake.conf")
