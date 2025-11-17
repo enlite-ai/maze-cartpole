@@ -76,8 +76,7 @@ Here are some example commands showing how to train and rollout agents for the e
 
 ### Experimenting
 
-Following Hydra's experiments configuration workflow
-we additionally provide a starting point for convenient
+Following Hydra's experiments configuration workflow we additionally provide a starting point for convenient
 [experimenting with Maze](https://maze-rl.readthedocs.io/en/latest/workflow/experimenting.html) (see `maze_cartpole/conf/experiment`). 
 
 * To start an experiment from a dedicated config, run:
