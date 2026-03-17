@@ -1,5 +1,0 @@
-# @package wrappers
-
-# limits the maximum number of time steps of an episode
-maze.core.wrappers.time_limit_wrapper.TimeLimitWrapper:
-  max_episode_steps: 200

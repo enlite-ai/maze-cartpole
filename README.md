@@ -40,15 +40,15 @@ Here are some example commands showing how to train and rollout agents for the e
 
 * Train an agent for the env with PPO:
 
-  `maze-run -cn conf_train env=cartpole_env algorithm=ppo wrappers=cartpole_wrappers`
+  `maze-run -cn conf_train env=cartpole_env algorithm=ppo`
 
 * Train the env with PPO and a template model:
 
-  `maze-run -cn conf_train env=cartpole_env algorithm=ppo model=cartpole_template_model wrappers=cartpole_wrappers`
+  `maze-run -cn conf_train env=cartpole_env algorithm=ppo model=cartpole_template_model`
 
 * Train the env with PPO and an environment specific custom model:
 
-  `maze-run -cn conf_train env=cartpole_env algorithm=ppo model=cartpole_custom_model critic=cartpole_custom_state_critic wrappers=cartpole_wrappers`
+  `maze-run -cn conf_train env=cartpole_env algorithm=ppo model=cartpole_custom_model critic=cartpole_custom_state_critic`
 
 * Train the env with PPO and some environment wrappers:
 
@@ -58,15 +58,15 @@ Here are some example commands showing how to train and rollout agents for the e
 
 * Run a rollout with the random policy (default):
 
-  `maze-run -cn conf_rollout env=cartpole_env wrappers=time_limit_wrapper`
+  `maze-run -cn conf_rollout env=cartpole_env`
 
 * Run a rollout with the env specific greedy policy:
 
-  `maze-run -cn conf_rollout env=cartpole_env policy=cartpole_heuristic_policy wrappers=time_limit_wrapper`
+  `maze-run -cn conf_rollout env=cartpole_env policy=cartpole_heuristic_policy`
 
 * Run a rollout with the greedy policy and render each step:
 
-  `maze-run -cn conf_rollout env=cartpole_env policy=cartpole_heuristic_policy runner=sequential runner.render=True wrappers=time_limit_wrapper`
+  `maze-run -cn conf_rollout env=cartpole_env policy=cartpole_heuristic_policy runner=sequential runner.render=True`
 
 * Run and render a rollout with a previously trained policy:
 
