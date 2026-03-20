@@ -82,7 +82,7 @@ class CartPoleCoreEnvironment(CoreEnv):
 
     @override(CoreEnv)
     def step(self, maze_action: CartPoleMazeAction) \
-            -> Tuple[CartPoleMazeState, np.array, bool, Dict[Any, Any]]:
+            -> Tuple[CartPoleMazeState, np.array, bool, bool, Dict[Any, Any]]:
         """Summary of the step (simplified, not necessarily respecting the actual order in the code):
         * Update the cart position and velocity
         * Update the pole position and velocity
@@ -94,7 +94,7 @@ class CartPoleCoreEnvironment(CoreEnv):
               maze.core.wrappers.time_limit_wrapper.TimeLimitWrapper.
 
         :param maze_action: MazeAction to take.
-        :return: state, reward, done, info
+        :return: state, reward, terminated, truncated, info
         """
         info = {}
         # Implement you step function here and record events
@@ -138,10 +138,7 @@ class CartPoleCoreEnvironment(CoreEnv):
         # aggregate reward from events
         rewards = self.reward_aggregator.summarize_reward(maze_state)
 
-        done = done_terminated or done_truncated
-        if done:
-            info['done_solved'] = done_terminated
-        return maze_state, sum(rewards), done, info
+        return maze_state, sum(rewards), done_terminated, done_truncated, info
 
     @override(CoreEnv)
     def get_maze_state(self) -> CartPoleMazeState:
