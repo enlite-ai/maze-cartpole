@@ -39,11 +39,11 @@ configurations = [
 
 @pytest.mark.parametrize("config_name,hydra_overrides", configurations)
 def test_standard_configurations(config_name: str, hydra_overrides: Dict[str, str], tmpdir):
+    hydra_overrides['hydra.run.dir'] = tmpdir
+
     # run training
     try:
         with Timeout(seconds=100):
-            if config_name == 'conf_train':
-                hydra_overrides['log_base_dir'] = tmpdir
             run_maze_job(hydra_overrides, config_module="maze.conf", config_name=config_name)
     except TimeoutError:
         # ignore timeout errors, we don't wait for the training to end
