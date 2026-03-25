@@ -147,13 +147,13 @@ class CartPoleCoreEnvironment(CoreEnv):
                                  pole_angle=self.pole_angle, pole_angular_velocity=self.pole_velocity)
 
     @override(CoreEnv)
-    def reset(self) -> CartPoleMazeState:
+    def reset(self) -> Tuple[CartPoleMazeState, dict]:
         """Resets the environment to initial state.
         
         Note: Decoupled logic. Seeding functionality is supported through dedicated seed() method.
         """
         self._setup_env()
-        return self.get_maze_state()
+        return self.get_maze_state(), {}
 
     @override(CoreEnv)
     def close(self) -> None:
