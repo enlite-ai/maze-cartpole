@@ -1,4 +1,4 @@
-This directory contains the project specific config files. 
+This directory contains the project specific config files.
 You can find the global Maze config [here](https://github.com/enlite-ai/maze/tree/main/maze/conf).
 
 For detailed information on the config system please refer to the corresponding

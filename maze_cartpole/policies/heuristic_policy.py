@@ -1,6 +1,8 @@
 """Dummy structured policy for the MazeProjectTemplate."""
 
-from typing import Sequence, Tuple, Optional
+from __future__ import annotations
+
+from collections.abc import Sequence
 
 from maze.core.agent.policy import Policy
 from maze.core.annotations import override
@@ -21,8 +23,7 @@ class CartPoleDummyHeuristic(Policy):
 
     @override(Policy)
     def needs_state(self) -> bool:
-        """implementation of :class:`~maze.core.agent.policy.Policy` interface
-        """
+        """implementation of :class:`~maze.core.agent.policy.Policy` interface"""
         return False
 
     @override(Policy)
@@ -31,19 +32,26 @@ class CartPoleDummyHeuristic(Policy):
         pass
 
     @override(Policy)
-    def compute_action(self, observation: ObservationType, maze_state: Optional[MazeStateType] = None,
-                       env: Optional[BaseEnv] = None, actor_id: ActorID = None, deterministic: bool = False
-                       ) -> ActionType:
-        """implementation of :class:`~maze.core.agent.policy.Policy` interface
-        """
-        action = 1 if observation["pole_angle"] > 0 else 0
-        return {"action": action}
+    def compute_action(
+        self,
+        observation: ObservationType,
+        maze_state: MazeStateType | None = None,  # noqa: ARG002
+        env: BaseEnv | None = None,  # noqa: ARG002
+        actor_id: ActorID = None,  # noqa: ARG002
+        deterministic: bool = False,  # noqa: ARG002
+    ) -> ActionType:
+        """implementation of :class:`~maze.core.agent.policy.Policy` interface"""
+        action = 1 if observation['pole_angle'] > 0 else 0
+        return {'action': action}
 
     @override(Policy)
-    def compute_top_action_candidates(self, observation: ObservationType, num_candidates: Optional[int],
-                                      maze_state: Optional[MazeStateType], env: Optional[BaseEnv],
-                                      actor_id: ActorID = None) \
-            -> Tuple[Sequence[ActionType], Sequence[float]]:
-        """implementation of :class:`~maze.core.agent.policy.Policy` interface
-        """
+    def compute_top_action_candidates(
+        self,
+        observation: ObservationType,
+        num_candidates: int | None,
+        maze_state: MazeStateType | None,
+        env: BaseEnv | None,
+        actor_id: ActorID = None,
+    ) -> tuple[Sequence[ActionType], Sequence[float]]:
+        """implementation of :class:`~maze.core.agent.policy.Policy` interface"""
         raise NotImplementedError

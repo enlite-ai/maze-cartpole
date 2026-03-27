@@ -1,5 +1,7 @@
-"""The Project specific Maze State, that is a more detailed (and usually structured) representation of the observation
-"""
+"""The Project specific Maze State, that is a more detailed (and usually structured) representation of the
+observation"""
+
+from __future__ import annotations
 
 
 class CartPoleMazeState:

@@ -1,5 +1,7 @@
 """The Project specific Maze Action, that is a more detailed (and usually structured) representation of the action"""
 
+from __future__ import annotations
+
 
 class CartPoleMazeAction:
     """MazeAction object holding the action for the environment.

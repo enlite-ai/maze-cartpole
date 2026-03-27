@@ -1,15 +1,16 @@
 """Contains the renderer for MazeProjectTemplateRenderer"""
-from typing import Optional
+
+from __future__ import annotations
+
+from maze_cartpole.env.maze_action import CartPoleMazeAction
+from maze_cartpole.env.maze_state import CartPoleMazeState
 
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 import numpy as np
-
 from maze.core.annotations import override
 from maze.core.log_events.step_event_log import StepEventLog
 from maze.core.rendering.renderer import Renderer
-from maze_cartpole.env.maze_action import CartPoleMazeAction
-from maze_cartpole.env.maze_state import CartPoleMazeState
 
 
 class CartPoleRenderer(Renderer):
@@ -27,8 +28,12 @@ class CartPoleRenderer(Renderer):
         self.x_threshold = x_threshold
 
     @override(Renderer)
-    def render(self, maze_state: CartPoleMazeState, maze_action: Optional[CartPoleMazeAction],
-               events: StepEventLog) -> None:
+    def render(
+        self,
+        maze_state: CartPoleMazeState,
+        maze_action: CartPoleMazeAction | None,  # noqa: ARG002
+        events: StepEventLog,  # noqa: ARG002
+    ) -> None:
         """Render provided maze_state and maze_action.
 
         :param maze_state: MazeState to render
@@ -55,8 +60,7 @@ class CartPoleRenderer(Renderer):
         plt.yticks([])
 
         # draw rail
-        plt.gca().add_patch(patches.Rectangle((0, carty - 4),
-                                              screen_width, 5, facecolor=(0, 0, 0)))
+        plt.gca().add_patch(patches.Rectangle((0, carty - 4), screen_width, 5, facecolor=(0, 0, 0)))
 
         # draw cart
         cartx = maze_state.cart_position * scale + screen_width / 2.0
@@ -65,10 +69,15 @@ class CartPoleRenderer(Renderer):
         plt.gca().add_patch(patches.Circle((cartx + cartwidth * 3 / 4, carty + 5), radius=5, facecolor=(0, 0, 0)))
 
         # draw pole
-        plt.gca().add_patch(patches.Rectangle((cartx + cartwidth / 2 - polewidth / 2, carty + cartheight / 2),
-                                              polewidth, polelen,
-                                              angle=np.rad2deg(-maze_state.pole_angle),
-                                              facecolor=(.8, .6, .4)))
+        plt.gca().add_patch(
+            patches.Rectangle(
+                (cartx + cartwidth / 2 - polewidth / 2, carty + cartheight / 2),
+                polewidth,
+                polelen,
+                angle=np.rad2deg(-maze_state.pole_angle),
+                facecolor=(0.8, 0.6, 0.4),
+            )
+        )
 
         plt.gca().text(20, 20, s=f'step: {events.env_time}')
 

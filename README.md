@@ -1,6 +1,6 @@
 ![Banner](https://github.com/enlite-ai/maze/raw/main/docs/source/logos/main_logo.png)
 
-# Maze Project Template 
+# Maze Project Template
 
 This repository serves as a template for starting your own projects with Maze.
 
@@ -14,10 +14,10 @@ For building your own project we recommend to start with:
 2. Implementing the [MazeCoreEnvironment](maze_cartpole/env/core_env.py).
    The class implements all main components of an RL environment such as the step function defining its dynamics.
 
-If this is all very new to you, you can take a look at our 
-[docs page](https://maze-rl.readthedocs.io/en/latest/index.html) where the whole framework is explained in more depth. 
+If this is all very new to you, you can take a look at our
+[docs page](https://maze-rl.readthedocs.io/en/latest/index.html) where the whole framework is explained in more depth.
 Furthermore, it also contains a
-[step-by-step getting started guide](https://maze-rl.readthedocs.io/en/latest/getting_started/step_by_step_tutorial.html) 
+[step-by-step getting started guide](https://maze-rl.readthedocs.io/en/latest/getting_started/step_by_step_tutorial.html)
 which iteratively builds a Maze environment entirely from scratch, explains all components in great detail and
 links to all relevant documentation pages.
 
@@ -28,7 +28,7 @@ links to all relevant documentation pages.
 
  * *Optional*: We also provided an [environment.yml](environment.yml) file
    to create a dedicated conda environment for your project.
-   
+
    Prepare with: `conda env create -f environment.yml`
 
 * Finally, install the project in development mode `pip install -e .` or manually add it to your `PYTHONPATH`.
@@ -77,11 +77,11 @@ Here are some example commands showing how to train and rollout agents for the e
 ### Experimenting
 
 Following Hydra's experiments configuration workflow we additionally provide a starting point for convenient
-[experimenting with Maze](https://maze-rl.readthedocs.io/en/latest/workflow/experimenting.html) (see `maze_cartpole/conf/experiment`). 
+[experimenting with Maze](https://maze-rl.readthedocs.io/en/latest/workflow/experimenting.html) (see `maze_cartpole/conf/experiment`).
 
 * To start an experiment from a dedicated config, run:
 
   `maze-run -cn conf_train +experiment=cartpole_hard_ppo`
-  
+
   The overrides in the experiment file will be applied to the defaults specified in
   [conf_train](https://github.com/enlite-ai/maze/blob/main/maze/conf/conf_train.yaml).
